@@ -7,10 +7,17 @@ import Main from "./Main/Main.js"
 
 export default function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("ログインする")
+  const [user, setUser] = useState({})
 
   const handleSetUser = (data) => {
     setLoggedInStatus(data.user.name)
-  }
+    setUser(data.user)
+  };
+
+  const handleRemoveUser = () => {
+    setLoggedInStatus("ログインする")
+    setUser({})
+  };
 
   useEffect(() => {
     checkLoginStatus()
@@ -29,13 +36,15 @@ export default function App() {
     .catch(error => {
       console.log(error)
     })
-  }
+  };
 
   return (
     <Container>
       <Header
         loggedInStatus={loggedInStatus}
+        user={user}
         handleSetUser={handleSetUser}
+        handleRemoveUser={handleRemoveUser}
       />
       <Main />
     </Container>

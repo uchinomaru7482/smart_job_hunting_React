@@ -35,6 +35,8 @@ export default function LoginUserModal(props) {
   const onClick = (event) => {
     handleClose()
     handleUserLogin(event)
+    setEmail("")
+    setPassword("")
   };
 
   return (

@@ -39,6 +39,10 @@ export default function CreateUserModal(props) {
   const onClick = (event) => {
     handleClose()
     handleUserRegistration(event)
+    setName("")
+    setEmail("")
+    setPassword("")
+    setPasswordConfirmation("")
   };
 
   return (
