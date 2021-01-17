@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import LoginUserModal from "./LoginUserModal";
 import CreateUserModal from "./CreateUserModal";
 
@@ -18,6 +18,24 @@ export default function Header(props) {
     props.handleRemoveUser()
   };
 
+  function LoggedInStatusDisplay() {
+    if(props.loggedInStatus === "ログインする") {
+      return(
+        <>
+          <CreateUserModal handleSetUser={props.handleSetUser} />
+          <LoginUserModal handleSetUser={props.handleSetUser} />
+        </>
+      )
+    } else {
+      return(
+        <>
+          <div className="d-flex align-items-center p-2">{props.loggedInStatus}</div>
+          <Button variant="outline-secondary" onClick={onClick}>ログアウト</Button>
+        </>
+      )
+    }
+  }
+
   return (
     <div>
       <Navbar bg="light" expand="lg">
@@ -27,10 +45,7 @@ export default function Header(props) {
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
-            <CreateUserModal handleSetUser={props.handleSetUser} />
-            <LoginUserModal handleSetUser={props.handleSetUser} />
-            {props.loggedInStatus}
-            <button onClick={onClick}>ログアウト</button>
+            <LoggedInStatusDisplay />
           </Nav>
         </Navbar.Collapse>
       </Navbar>

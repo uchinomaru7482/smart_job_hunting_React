@@ -46,7 +46,7 @@ export default function CreateUserModal(props) {
   };
 
   return (
-    <div>
+    <div className="pr-2">
       <Button variant="primary" onClick={handleShow}>
         新規登録
       </Button>
