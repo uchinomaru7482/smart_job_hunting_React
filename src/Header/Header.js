@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import LoginUserModal from "./LoginUserModal";
-import CreateUserModal from "./CreateUserModal";
+import UserLoginModal from "./UserLoginModal";
+import UserCreateModal from "./UserCreateModal";
 
 export default function Header(props) {
   const handleUserLogout = () => {
@@ -29,8 +29,8 @@ export default function Header(props) {
     } else {
       return(
         <>
-          <CreateUserModal handleSetUser={props.handleSetUser} />
-          <LoginUserModal handleSetUser={props.handleSetUser} />
+          <UserCreateModal handleSetUser={props.handleSetUser} />
+          <UserLoginModal handleSetUser={props.handleSetUser} />
         </>
       )
     }
