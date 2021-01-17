@@ -6,16 +6,16 @@ import Header from "./Header/Header.js"
 import Main from "./Main/Main.js"
 
 export default function App() {
-  const [loggedInStatus, setLoggedInStatus] = useState("ログインする")
+  const [loggedInStatus, setLoggedInStatus] = useState(false)
   const [user, setUser] = useState({})
 
   const handleSetUser = (data) => {
-    setLoggedInStatus(data.user.name)
+    setLoggedInStatus(true)
     setUser(data.user)
   };
 
   const handleRemoveUser = () => {
-    setLoggedInStatus("ログインする")
+    setLoggedInStatus(false)
     setUser({})
   };
 
@@ -28,9 +28,10 @@ export default function App() {
     .then(response => {
       console.log(response)
       if (response.data.logged_in) {
-        setLoggedInStatus(response.data.user.name)
+        setLoggedInStatus(true)
+        setUser(response.data.user)
       } else {
-        setLoggedInStatus("ログインする")
+        setLoggedInStatus(false)
       }
     })
     .catch(error => {
@@ -46,7 +47,9 @@ export default function App() {
         handleSetUser={handleSetUser}
         handleRemoveUser={handleRemoveUser}
       />
-      <Main />
+      <Main
+        loggedInStatus={loggedInStatus}
+      />
     </Container>
   )
 }

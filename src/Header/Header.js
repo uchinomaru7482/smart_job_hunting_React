@@ -19,18 +19,18 @@ export default function Header(props) {
   };
 
   function LoggedInStatusDisplay() {
-    if(props.loggedInStatus === "ログインする") {
+    if(props.loggedInStatus) {
       return(
         <>
-          <CreateUserModal handleSetUser={props.handleSetUser} />
-          <LoginUserModal handleSetUser={props.handleSetUser} />
+          <div className="d-flex align-items-center p-2">{props.user.name}</div>
+          <Button variant="outline-secondary" onClick={onClick}>ログアウト</Button>
         </>
       )
     } else {
       return(
         <>
-          <div className="d-flex align-items-center p-2">{props.loggedInStatus}</div>
-          <Button variant="outline-secondary" onClick={onClick}>ログアウト</Button>
+          <CreateUserModal handleSetUser={props.handleSetUser} />
+          <LoginUserModal handleSetUser={props.handleSetUser} />
         </>
       )
     }
