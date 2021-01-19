@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Company from "./Company";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 export default function CompanyList() {
   const [companys, setCompanys] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     checkCompanys()
-  },[])
+  },[history])
 
   const checkCompanys = () => {
     axios.get("http://localhost:3001/api/v1/companys", { withCredentials: true })
@@ -24,6 +26,7 @@ export default function CompanyList() {
   return (
     <div>
       <h5 className="p-3">会社一覧</h5>
+      <Button onClick={() => history.push("/company/new")}>会社登録</Button>
       <Table striped bordered hover>
         <thead>
           <tr>
