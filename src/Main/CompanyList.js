@@ -1,27 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import Company from "./Company";
 import { Table, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
-export default function CompanyList() {
-  const [companys, setCompanys] = useState([]);
+export default function CompanyList(props) {
   const history = useHistory();
-
-  useEffect(() => {
-    checkCompanys()
-  },[history])
-
-  const checkCompanys = () => {
-    axios.get("http://localhost:3001/api/v1/companys", { withCredentials: true })
-    .then(response => {
-      console.log(response)
-      setCompanys(response.data)
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }
 
   return (
     <div>
@@ -37,10 +20,10 @@ export default function CompanyList() {
           </tr>
         </thead>
 
-        {companys.map((data) => {
+        {props.companys.map((data) => {
           return(
             <tbody key={ data.id }>
-              <Company name={ data.name } progress={ data.progress } motivation={ data.motivation } remarks={ data.remarks } />
+              <Company id={data.id} name={ data.name } progress={ data.progress } motivation={ data.motivation } remarks={ data.remarks } />
             </tbody>
           )
         })}
